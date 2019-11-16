@@ -1,0 +1,346 @@
+swagger: "2.0"
+info:
+  version: "2.0.0"
+  title: UMG Sandbox Metadata API
+  description: |
+    UMG Search & Discovery REST API for exploring UMG Artists, Tracks and Works
+
+      * **Track Search**
+        * **/api/search/tracks**
+          * queries across several track data points and returns tracks meeting the search criteria
+          * search by term: `q={string}`
+
+
+      * **Artist Search**
+        * **/api/search/artists**
+            * returns matches based on artist name
+            * search by term: `q={string}`
+
+      * **Retrieval of specific Track data via ISRC**
+        * **/api/tracks/:isrc**
+          * returns label copy, creative metadata, composer/work info etc
+          
+      * **Retrieval of specific Artist data via UMG ID**
+        * **/api/artists/:umg_id**
+          * returns name, uMG IDs and Musicbrainz ID
+          
+      * **Retrieval of specific Work data via work code**
+        * **/api/works/:work_code**
+          * returns group of tracks constituting musical work
+
+    * **Examples:**
+      - {baseUrl}/search/artists?q=Elvis
+      - {baseUrl}/search/tracks?q=goodbye
+      - {baseUrl}/artists/10035087
+      - {baseUrl}/tracks/USCA20100360
+      - {baseUrl}/works/949261
+
+# during dev, should point to your local machine
+# host: localhost:10010
+
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /search/artists:
+    x-swagger-router-controller: search
+    get:
+      operationId: searchArtists
+      description: Search artists by artist name
+      parameters: 
+        - name: q
+          in: query
+          type: string
+          description: Query string to match against artist
+        - name: offset
+          in: query
+          type: integer
+          description: The number of artists to skip before starting to collect the result set (default 50)
+        - name: limit
+          in: query
+          type: integer
+          description: The number of artists to return (default 50)
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Artists"
+  /search/tracks:
+    x-swagger-router-controller: search
+    get:
+      operationId: searchTracks
+      description: Search tracks by title, version title, isrc and label
+      parameters: 
+        - name: q
+          in: query
+          type: string
+          description: Query string to match against tracks
+        - name: offset
+          in: query
+          type: integer
+          description: The number of tracks to skip before starting to collect the result set (default 50)
+        - name: limit
+          in: query
+          type: integer
+          description: The number of tracks to return (default 50)
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Tracks"
+  /artists:
+    x-swagger-router-controller: artists
+    get:
+      operationId: getAllArtists
+      description: Returns all available artists + artist_id
+      parameters: 
+        - name: offset
+          in: query
+          type: integer
+          description: The number of artists to skip before starting to collect the result set (default 50)
+        - name: limit
+          in: query
+          type: integer
+          description: The number of artists to return (default 50)
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Artists"
+
+  /artists/{artist_id}:
+    x-swagger-router-controller: artists
+    get:
+      operationId: getOneArtist
+      description: Returns all track metadata associated with an artist
+      parameters:
+        - name: artist_id
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Artist"
+        "404":
+          description: An artist with the specified ID was not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /tracks:
+    x-swagger-router-controller: tracks
+    get:
+      operationId: getAllTracks
+      description: Returns track list of available tracks to the controller
+      parameters:
+        - name: offset
+          in: query
+          type: integer
+          description: The number of tracks to skip before starting to collect the result set (default 50)
+        - name: limit
+          in: query
+          type: integer
+          description: The number of tracks to return (default 50)
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Tracks"
+  /tracks/{isrc}:
+    x-swagger-router-controller: tracks
+    get:
+      operationId: getOneTrack
+      description: Returns all metadata associated with an ISRC
+      parameters:
+        - name: isrc
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Track"
+        "404":
+          description: A track with the specified ISRC was not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /works:
+    x-swagger-router-controller: works
+    get:
+      operationId: getAllWorks
+      description: Returns Work list of available works to the controller
+      parameters:
+        - name: offset
+          in: query
+          type: integer
+          description: The number of works to skip before starting to collect the result set (default 50)
+        - name: limit
+          in: query
+          type: integer
+          description: The number of works to return (default 50)
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Works"
+  /works/{work_code}:
+    x-swagger-router-controller: works
+    get:
+      operationId: getOneWork
+      description: Returns all metadata associated with a UMPG PREF code
+      parameters:
+        - name: work_code # is the PREF code
+          type: string
+          in: path
+          required: true
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/Work"
+        "404":
+          description: A work with the specified work_code was not found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /swagger:
+    x-swagger-pipe: swagger_raw
+definitions:
+  Artists:
+    required:
+      - artists
+    properties:
+      artists:
+        type: array
+        items: 
+          type: object
+          items:
+            $ref: "#/definitions/Artist"
+  Artist:
+    properties:
+      artist_id:
+        type: number
+      musicbrainz_id:
+        type: string
+      umg_artist_id:
+        type: number
+      artist_name:
+        type: string
+      tracks:
+        type: array
+        items: 
+          type: object
+          properties:
+            isrc:
+              type: string
+            title:
+              type: string
+            version_title:
+              type: string
+            pc_notice_year:
+              type: string
+            pc_notice_company_name:
+              type: string
+            label_name:
+              type: string
+            umg_track_id:
+              type: integer
+            track_grouping_id:
+              type: integer
+            umg_track_type:
+              type: string
+  Tracks:
+    required:
+      - tracks
+    properties:
+      tracks:
+        type: array
+        items: 
+          type: object
+          items:
+            $ref: "#/definitions/Track"
+  Track:
+    properties:
+      umg_track_id:
+        type: integer
+      track_grouping_id:
+        type: integer
+      umg_track_type:
+        type: string
+      isrc:
+        type: string
+      title:
+        type: string
+      version_title:
+        type: string
+      pc_notice_year:
+        type: string
+      pc_notice_company_name:
+        type: string
+      label_name:
+        type: string
+      albums:
+        type: array
+        items:
+          type: object
+          properties:
+            upc:
+              type: string
+            upc_track_no:
+              type: integer
+            release_date:
+              type: string
+            spotify_track_uri:
+              type: string
+      artists:
+        type: array
+        items:
+          type: object
+          properties:
+            artist_id:
+              type: integer
+            musicbrainz_id:
+              type: string
+            umg_artist_id:
+              type: integer
+            artist_name:
+              type: string
+      creative:
+        type: object
+        items:
+          type: string
+  Works:
+    required:
+      - works
+    properties:
+      works:
+        type: array
+        items: 
+          type: object
+          items:
+            $ref: "#/definitions/Work"
+  Work: 
+    properties:
+      work_code:
+        type: string
+      title:
+        type: string
+      composers:
+        type: string
+      iswc:
+        type: string
+      tracks:
+        type: array
+        items: 
+          type: object
+          items:
+            $ref: "#/definitions/Track"
+  ErrorResponse:
+    required:
+      - message
+    properties:
+      message:
+        type: string
+  
