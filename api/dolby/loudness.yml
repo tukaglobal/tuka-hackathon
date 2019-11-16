@@ -1,0 +1,537 @@
+openapi: 3.0.0
+servers:
+  - url: "https://api.dolby.com"
+security:
+  - "x-apikey": []
+info:
+  title: Loudness
+  description: |
+    Submit jobs to analyze the loudness of a media file and conformance to
+    standards or industry platform specifications.
+
+    POST to start a job and GET with the returned job_id to check progress.
+  version: "0.0.0"
+  contact:
+    email: support@dlby.io
+tags:
+  - name: analyze
+    description: Operations for analyzing the loudness level of a media file
+  - name: process
+    description: Operations for processing or adjusting the loudness level of a media file
+components:
+  securitySchemes:
+    "x-apikey":
+      name: x-apikey
+      type: apiKey
+      in: header
+paths:
+  "/beta/media/analyze/loudness":
+    post:
+      tags:
+        - analyze
+      summary: Start loudness analysis
+      operationId: postAnalyzeLoudness
+      description: |
+        The Loudness Analysis API detects loudness levels in media files.  Submit
+        your content for analysis.
+      security:
+        - "x-apikey": []
+      requestBody:
+        required: true
+        description: |
+          Asnynchronous operation, provide required input and
+          output parameters.
+        content:
+          "application/json":
+            schema:
+              type: object
+              required:
+                - input
+              properties:
+                input:
+                  oneOf:
+                  - type: string
+                    description: A world read-able URL
+                  - type: object
+                    required:
+                      - url
+                    properties:
+                      url:
+                        type: string
+                        description: URL for media file to process
+                        example: 's3://wow-media-bucket/wow-media-object-in.mp3'
+                      auth:
+                        oneOf:
+                          - type: object
+                            required:
+                              - key
+                              - secret
+                              - token
+                            properties:
+                              key:
+                                type: string
+                                description: AWS Access Key Id
+                                example: '...'
+                              secret:
+                                type: string
+                                description: AWS Secret Access Key
+                                example: '...'
+                              token:
+                                type: string
+                                description: AWS Session Token
+                                example: '...'
+                  example: { url: "s3://wow-media-bucket/wow-media-object-in.mp3", auth: { key: "...", secret: "...", token: "..."}}
+                target:
+                  type: string
+                  enum:
+                    - standard_a85
+                    - standard_r128
+                    - service_amazon
+                    - service_apple
+                    - service_facebook
+                    - service_pandora
+                    - service_spotify
+                    - service_soundcloud
+                    - service_vimeo
+                    - service_youtube
+                    - playback_laptop
+                    - playback_mobile
+                    - custom
+                  default: standard_a85
+                  example: custom
+                custom:
+                  type: object
+                  description: If target is custom, these settings will be used for analysis and validation
+                  properties:
+                    metering_mode:
+                      type: string
+                      enum:
+                        - 1770-2
+                        - 1770-3
+                        - 1770-4
+                      default: 1770-4
+                      description: The metering mode to use for the loudness measurement.
+                    dialogue_intelligence:
+                      type: boolean
+                      default: true
+                      example: true
+                      description: Controls if identification of dialog segments within the file is used to do speech gating.
+                    speech_threshold:
+                      type: number
+                      format: float
+                      minimum: 0
+                      maximum: 100
+                      default: 15
+                      example: 15
+                      description: Percentage of speech threshold for when to consider a dialog segment.
+                    true_peak_max:
+                      type: number
+                      format: float
+                      description: Maximum value that if loudness exceeds validation fails.
+                      default: 0
+                      example: 0
+                    loudness_max:
+                      type: number
+                      format: float
+                      description: Maximum value that if integrated loudness exceeds validation fails.
+                      example: 0
+                      default: 0
+                    loudness_min:
+                      type: number
+                      format: float
+                      default: -99
+                      description: The minimum value that if integrated loudness falls below validation fails.
+                      example: -99
+                    measurement_window:
+                      type: number
+                      format: float
+                      enum: 
+                        - 10
+                        - 3
+                        - 0.4
+                      default: 10
+                      example: 10
+                      description: Window size for loudness measurement, in seconds.
+      responses:
+        '200':
+          description: |
+              Request Accepted OK.
+              Call GET with your job_id to check on the status of the result.
+          content:
+            "application/json":
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                    description: Unique identifier for this long-running job
+                    example: "a293a26a-8c77-46bf-8eb6-aecc8649d524"
+        '400':
+          description: |
+              Bad Request.
+              The body of the response will give additional details and you
+              may need to double-check the provided parameters.
+        '401':
+          description: |
+              Authentication Failed.
+              Make sure you are providing your API Key in the x-apikey header
+              of the request.
+    get:
+      tags:
+        - analyze
+      summary: Check status and get results of loudness analysis
+      operationId: getAnalyzeLoudness
+      description: |
+        Retrieve the status of a processing job by job_id.
+      security:
+        - "x-apikey": []
+      parameters:
+        - name: job_id
+          in: query
+          description: Unique job_id for a submitted asynchronous processing job
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: |
+            Status of this job.  When completed successfully you can find the analysis in the result of the response.
+          content:
+            "application/json":
+              schema:
+                type: object
+                required:
+                  - status
+                  - path
+                  - progress
+                properties:
+                  status:
+                    type: string
+                    description: The status of the job while it is being processed.
+                    example: Success
+                    enum:
+                      - Pending
+                      - Failed
+                      - Running
+                      - Success
+                      - InternalError
+                  path:
+                    type: string
+                    description: The endpoint you are using
+                    example: "/beta/media/analyze/loudness"
+                  progress:
+                    type: integer
+                    description: An estimate of how much progress has been made processing the file
+                    example: 100
+                  result:
+                    type: object
+                    required:
+                      - loudness_analysis
+                      - sample_peak
+                      - true_peak
+                      - integrated_loudness
+                    properties:
+                        loudness_analysis:
+                            type: object
+                            required:
+                              - pass
+                            properties:
+                                pass:
+                                    type: boolean
+                                    description: A pass / fail evaluation against a profile threshold
+                                    example: false
+                                status_code:
+                                    type: array
+                                    items:
+                                      type: number
+                                      enum:
+                                        - 1001
+                                        - 1002
+                                        - 1003
+                                        - 1004
+                                      example: 1002
+                                      description: See "Getting Started with Loudness" for a table of what the status codes mean.
+                        integrated_loudness:
+                            type: number
+                            description: The integrated loudness is the overall level for the audio
+                            format: float
+                            maximum: 0
+                            example: -21.74
+                        sample_peak:
+                            type: number
+                            description: The peak loudness of the sample (db)
+                            format: float
+                            maximum: 0
+                            example: -8.08
+                        true_peak:
+                            type: number
+                            format: float
+                            description: The true peak loudness of the media file (db)
+                            example: -8.03
+                        level_gated_loudness:
+                            type: number
+                            format: float
+                            description: The level gated loudness (db)
+                            example: -20.4
+                        speech_gated_loudness:
+                            type: number
+                            format: float
+                            description: The speech gated loudness (db)
+                            example: -21.74
+                        speech_percentage:
+                            type: number
+                            format: float
+                            maximum: 100
+                            minimum: 0
+                            description: The percentage of the media identified as dialog
+                            example: 63.99
+                  error:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        example: An internal service error has occurred
+                      type:
+                        type: string
+                        example: "/problems/internal-error"
+        '404':
+          description: |
+            The job for the given job_id was not found
+  "/beta/media/process/loudness":
+    post:
+      tags:
+        - process
+      summary: Start loudness processing
+      operationId: postProcessLoudness
+      description: |
+        The Loudness Processing API corrects loudness levels in media files.  Submit
+        your content for processing.
+      security:
+        - "x-apikey": []
+      requestBody:
+        required: true
+        description: |
+          Asnynchronous operation, provide required input and
+          output parameters.
+        content:
+          "application/json":
+            schema:
+              type: object
+              required:
+                - input
+                - output
+              properties:
+                input:
+                  oneOf:
+                  - type: string
+                    description: A world read-able URL
+                  - type: object
+                    required:
+                      - url
+                    properties:
+                      url:
+                        type: string
+                        description: URL for media file to process
+                        example: 's3://wow-media-bucket/wow-media-object-in.mp3'
+                      auth:
+                        oneOf:
+                          - type: object
+                            required:
+                              - key
+                              - secret
+                              - token
+                            properties:
+                              key:
+                                type: string
+                                description: AWS Access Key Id
+                                example: '...'
+                              secret:
+                                type: string
+                                description: AWS Secret Access Key
+                                example: '...'
+                              token:
+                                type: string
+                                description: AWS Session Token
+                                example: '...'
+                  example: { url: "s3://wow-media-bucket/wow-media-object-in.mp3", auth: { key: "...", secret: "...", token: "..."}}
+                output:
+                  oneOf:
+                  - type: string
+                    description: A world write-able URL to PUT the file
+                  - type: object
+                    required:
+                      - url
+                    properties:
+                      url:
+                        type: string
+                        description: URL for media file to write result
+                        example: 's3://wow-media-bucket/wow-media-object-out.mp3'
+                      auth:
+                        oneOf:
+                          - type: object
+                            required:
+                              - key
+                              - secret
+                              - token
+                            properties:
+                              key:
+                                type: string
+                                description: AWS Access Key Id
+                                example: '...'
+                              secret:
+                                type: string
+                                description: AWS Secret Access Key
+                                example: '...'
+                              token:
+                                type: string
+                                description: AWS Session Token
+                                example: '...'
+                  example: { url: "s3://wow-media-bucket/wow-media-object-out.mp3", auth: { key: "...", secret: "...", token: "..."}}
+                target:
+                  type: string
+                  enum:
+                    - standard_a85
+                    - standard_r128
+                    - service_amazon
+                    - service_apple
+                    - service_facebook
+                    - service_pandora
+                    - service_spotify
+                    - service_soundcloud
+                    - service_vimeo
+                    - service_youtube
+                    - playback_laptop
+                    - playback_mobile
+                    - custom
+                  default: standard_a85
+                  example: standard_a85
+      responses:
+        '200':
+          description: |
+              Request Accepted OK.
+              Call GET with your job_id to check on the status of the result.
+          content:
+            "application/json":
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                    description: Unique identifier for this long-running job
+                    example: "a293a26a-8c77-46bf-8eb6-aecc8649d524"
+        '400':
+          description: |
+              Bad Request.
+              The body of the response will give additional details and you
+              may need to double-check the provided parameters.
+        '401':
+          description: |
+              Authentication Failed.
+              Make sure you are providing your API Key in the x-apikey header
+              of the request.
+    get:
+      tags:
+        - process
+      summary: Check Status of Loudness Processing
+      operationId: getProcessLoudness
+      description: |
+        Retrieve the status of a processing job by job_id.
+      security:
+        - "x-apikey": []
+      parameters:
+        - name: job_id
+          in: query
+          description: Unique job_id for a submitted asynchronous processing job
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: |
+            Status of this job.  When completed successfully you can find the media file in the output location you provided.
+          content:
+            "application/json":
+              schema:
+                type: object
+                required:
+                  - status
+                  - path
+                  - progress
+                properties:
+                  status:
+                    type: string
+                    description: The status of the job while it is being processed.
+                    example: Success
+                    enum:
+                      - Pending
+                      - Failed
+                      - Running
+                      - Success
+                      - InternalError
+                  path:
+                    type: string
+                    description: The endpoint you are using
+                    example: "/beta/media/process/loudness"
+                  progress:
+                    type: integer
+                    description: An estimate of how much progress has been made processing the file
+                    example: 100
+                  result:
+                    type: object
+                    required:
+                      - original
+                    properties:
+                        original:
+                            type: object
+                            required:
+                              - integrated_loudness
+                              - gating_mode
+                              - sample_peak
+                              - true_peak
+                            properties:
+                                integrated_loudness:
+                                  type: number
+                                  format: float
+                                  maximum: 0
+                                  example: -21.74
+                                gating_mode:
+                                  type: string
+                                  enum:
+                                    - speech
+                                    - level
+                                  example: speech
+                                speech_percentage:
+                                  type: number
+                                  format: float
+                                  minimum: 0
+                                  maximum: 100
+                                  example: 64.122726
+                                sample_peak:
+                                    type: array
+                                    items:
+                                      type: number
+                                      format: float
+                                      maximum: 0
+                                      example: -5.023477
+                                    description: The peak loudness of the sample (db)
+                                true_peak:
+                                    type: array
+                                    items:
+                                      type: number
+                                      format: float
+                                      maximum: 0
+                                      example: -5.02009
+                                    description: The true peak loudness of the media file (db)
+                  error:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        example: An internal service error has occurred
+                      type:
+                        type: string
+                        example: "/problems/internal-error"
+        '404':
+          description: |
+            The job for the given job_id was not found
+
