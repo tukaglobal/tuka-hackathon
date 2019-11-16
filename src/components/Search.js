@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import dotenv from 'dotenv';
 
 class Search extends Component {
 
@@ -7,20 +8,21 @@ class Search extends Component {
   }
 
   componentDidMount() {
-    this.getGenres
+    this.getGenres()
   }
 
   getGenres = async () => {
     try {
       const genres = await fetch(`https://hackathon.umusic.com/prod/v1/tracks`, {
-        schema: loadJSON(__dirname + "/streaming.json"),
-        // baseURL: 'https://hackathon.umusic.com/prod',
-        extraHeaders: {
-          'x-api-key': process.env.UMG_API_KEY
-        },
-        type: 'text'
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'x-api-key': 'xmN6Ijjcxy1GzOGsOcu1a6EpbSden1c64P3r5bQh',
+          'Access-Control-Allow-Origin': '*'
+        }
       })
       const genresJSON = await genres.json();
+      console.log(genresJSON.tracks[2]['isrc'], 'genresJSON')
       this.setState({query: genresJSON}, () => {
         console.log(this.state.query)
       })

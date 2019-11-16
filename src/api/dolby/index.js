@@ -1,4 +1,4 @@
-const { loadYaml, buildAPIClient } = require('../builder.js');
+const { loadYaml, buildAPIClient } = require('../builder.js.js');
 
 const KEY = process.env.DOLBY_API_KEY;
 
