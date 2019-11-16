@@ -1,0 +1,15 @@
+.accordion {
+  height: 20rem;
+  width: 100%;
+  background: $color-white;
+  position: relative;
+
+  &__button {
+    position: absolute;
+    top: 20%;
+    left: 0%;
+    border: none;
+    background: transparent;
+  }
+}
+
