@@ -1,9 +1,12 @@
-//BASE
-@import "./base/base";
-
 //ABSTRACTS
 @import "./abstracts/mixins";
 @import "./abstracts/variables";
 
+//BASE
+@import "./base/base";
+
+//COMPONENTS 
+@import "./components/navbar";
+
 //MAIN PAGE
-@import "./pages/home.scss";
+@import "./pages/home";
