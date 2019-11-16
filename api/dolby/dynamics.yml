@@ -1,0 +1,138 @@
+openapi: 3.0.0
+servers:
+  - url: "https://api.dolby.com"
+security:
+  - "x-apikey": []
+info:
+  title: Dynamics
+  description: |
+
+    Read the [Getting Started with Dynamics](/documentation/dynamics/getting-started) guide
+    for an overview of this API.
+
+  version: "0.0.0"
+  contact:
+    email: support@dlby.io
+tags:
+  - name: dynamics
+    description: Dynamics
+components:
+  securitySchemes:
+    "x-apikey":
+      name: x-apikey
+      type: apiKey
+      in: header
+paths:
+  "/beta/media/process/dynamics":
+    post:
+      tags:
+        - dynamics
+      summary: Start Dynamic Range Compression
+      operationId: postProcessDynamics
+      description: |
+        The Dynamics API will level conversational dialog so that highs and lows
+        are less dramatic.  The compressed dynamic range creates a more pleasing experience
+        for the listener.
+
+        Use POST to begin an asynchronous processing request.
+      security:
+        - "x-apikey": []
+      requestBody:
+        required: true
+        description: |
+          Ansynchronous operation, provide required input and
+          output parameters.
+        content:
+          "application/json":
+            schema:
+              type: object
+              required:
+                - input
+                - output
+              properties:
+                input:
+                  $ref: '/api-spec/requests.yaml#/components/parameters/StandardInput'
+                output:
+                  $ref: '/api-spec/requests.yaml#/components/parameters/StandardOutput'
+                mode:
+                  type: string
+                  description: |
+                    The loud mode (default) levels content to a relatively high level (approximately -14dB)
+                    while compressing loud passages and boosting quiet passages.
+
+                    The dynamic mode uses a comparatively lower volume to do so and allows for more dynamic range
+                    in the content (approximately -20dB).
+                  enum:
+                    - loud
+                    - dynamic
+                  example: loud
+                  default: loud
+      responses:
+        '200':
+          description: Request accepted
+          $ref: '/api-spec/responses.yaml#/components/responses/Standard200'
+        '400':
+          $ref: '/api-spec/responses.yaml#/components/responses/Standard400'
+        '401':
+          $ref: '/api-spec/responses.yaml#/components/responses/Standard401'
+        '5XX':
+          $ref: '/api-spec/responses.yaml#/components/responses/Standard5XX'
+    get:
+      tags:
+        - dynamics
+      summary: Check Status of Dynamics Process
+      operationId: getProcessDynamics
+      description: |
+        Retrieve the status of a processing job by job_id.
+      security:
+        - "x-apikey": []
+      parameters:
+        - name: job_id
+          in: query
+          description: Unique job_id for a submitted asynchronous processing job
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: |
+            Status of this job.  When completed successfully you can find the media file in the output location you provided.
+          content:
+            "application/json":
+              schema:
+                type: object
+                required:
+                  - status
+                  - path
+                  - progress
+                properties:
+                  status:
+                    type: string
+                    description: The status of the job while it is being processed.
+                    example: Pending
+                    enum:
+                      - Pending
+                      - Failed
+                      - Running
+                      - Success
+                      - InternalError
+                  path:
+                    type: string
+                    description: The endpoint you are using
+                    example: "/beta/media/process/dynamics"
+                  progress:
+                    type: integer
+                    description: An estimate of how much progress has been made processing the file
+                    example: 5
+                  error:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        example: An internal service error has occurred
+                      type:
+                        type: string
+                        example: "/problems/internal-error"
+        '404':
+          description: |
+            The job for the given job_id was not found

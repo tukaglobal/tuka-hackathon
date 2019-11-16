@@ -1,0 +1,138 @@
+openapi: 3.0.0
+servers:
+  - url: "https://api.dolby.com"
+security:
+  - "x-apikey": []
+info:
+  title: Sibilance
+  description: |
+    Overview
+  version: "0.0.0"
+  contact:
+    email: cloudops-devrel@dolby.com
+tags:
+  - name: sibilance
+    description: Reduce excessive prominence of sibilant sounds
+components:
+  securitySchemes:
+    "x-apikey":
+      name: x-apikey
+      type: apiKey
+      in: header
+paths:
+  "/beta/media/process/sibilance":
+    post:
+      tags:
+        - sibilance
+      summary: Start sibilance detection and reduction processing
+      operationId: postProcessSibilance
+      description: |
+        The De-Esser API detects stressed consonant sounds like "s", "z", "ch", and "sh"
+        and reduces excessive prominence of these sibilant sounds.
+      security:
+        - "x-apikey": []
+      requestBody:
+        required: true
+        description: |
+          Asnynchronous operation, provide required input and
+          output parameters.
+        content:
+          "application/json":
+            schema:
+              type: object
+              required:
+                - input
+                - output
+              properties:
+                input:
+                  type: string
+                  description: URI for media file to process
+                  example: "https://your-bucket.s3-us-west-1.amazonaws.com/in/crowd-cheering.mp3"
+                output:
+                  type: string
+                  description: URI for writing processed media file result
+                  example: "https://your-bucket.s3-us-west-1.amazonaws.com/out/crowd-cheering.mp3"
+      responses:
+        '200':
+          description: |
+              Request Accepted OK.
+              Call GET with your job_id to check on the status of the result.
+          content:
+            "application/json":
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                    description: Unique identifier for this long-running job
+                    example: "a293a26a-8c77-46bf-8eb6-aecc8649d524"
+        '400':
+          description: |
+              Bad Request.
+              The body of the response will give additional details and you
+              may need to double-check the provided parameters.
+        '401':
+          description: |
+              Authentication Failed.
+              Make sure you are providing your API Key in the x-apikey header
+              of the request.
+    get:
+      tags:
+        - sibilance
+      summary: Check Status of De-Esser Process
+      operationId: getProcessSibilance
+      description: |
+        Retrieve the status of a processing job by job_id.
+      security:
+        - "x-apikey": []
+      parameters:
+        - name: job_id
+          in: query
+          description: Unique job_id for a submitted asynchronous processing job
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: |
+            Status of this job.  When completed successfully you can find the media file in the output location you provided.
+          content:
+            "application/json":
+              schema:
+                type: object
+                required:
+                  - status
+                  - path
+                  - progress
+                properties:
+                  status:
+                    type: string
+                    description: The status of the job while it is being processed.
+                    example: Pending
+                    enum:
+                      - Pending
+                      - Failed
+                      - Running
+                      - Success
+                      - InternalError
+                  path:
+                    type: string
+                    description: The endpoint you are using
+                    example: "/beta/media/process/sibilance"
+                  progress:
+                    type: integer
+                    description: An estimate of how much progress has been made processing the file
+                    example: 5
+                  error:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        example: An internal service error has occurred
+                      type:
+                        type: string
+                        example: "/problems/internal-error"
+        '404':
+          description: |
+            The job for the given job_id was not found
+

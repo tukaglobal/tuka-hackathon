@@ -1,0 +1,164 @@
+openapi: 3.0.0
+servers:
+  - url: "https://api.dolby.com"
+security:
+  - "x-apikey": []
+info:
+  title: Virtualize
+  description: |
+    Overview
+  version: "0.0.0"
+  contact:
+    email: support@dlby.io
+tags:
+  - name: virtualize
+    description: Virtualize incoming audio into a virtual surround location
+components:
+  securitySchemes:
+    "x-apikey":
+      name: x-apikey
+      type: apiKey
+      in: header
+paths:
+  "/beta/media/process/virtualize":
+    post:
+      tags:
+        - virtualize
+      summary: Start Virtualizion Job
+      operationId: postProcessVirtualize
+      description: |
+        The Virtualize API mixes mono or stereo input content into a virtual surround location.
+      security:
+        - "x-apikey": []
+      requestBody:
+        required: true
+        description: |
+          Asnynchronous operation, provide required input and
+          output parameters.
+        content:
+          "application/json":
+            schema:
+              type: object
+              required:
+                - inputs
+                - output
+              properties:
+                inputs:
+                  type: array
+                  minItems: 1
+                  items:
+                    type: object
+                    required:
+                      - input
+                      - position
+                    properties:
+                      input:
+                        $ref: '/api-spec/requests.yaml#/components/parameters/StandardInput'
+                      position:
+                        type: string
+                        enum:
+                          - stereo_front
+                          - stereo_surround
+                          - stereo_rear
+                          - stereo_top
+                          - left_front
+                          - left_surround
+                          - left_rear
+                          - left top
+                          - right_front
+                          - right_surround
+                          - right_rear
+                          - right_top
+                output:
+                    $ref: '/api-spec/requests.yaml#/components/parameters/StandardOutput'
+                room_level:
+                  type: number
+                  description: Controls the level of the room response in the Virtualizer. Higher values indicates a more reverberant response. The value is given in decibels. Values outside the specified range will be clipped. Range ([-30.00 dB - 12.00 dB])
+      responses:
+        '200':
+          description: |
+              Request Accepted OK.
+              Call GET with your job_id to check on the status of the result.
+          content:
+            "application/json":
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+                    description: Unique identifier for this long-running job
+                    example: "a293a26a-8c77-46bf-8eb6-aecc8649d524"
+        '400':
+          description: |
+              Bad Request.
+              The body of the response will give additional details and you
+              may need to double-check the provided parameters.
+        '401':
+          description: |
+              Authentication Failed.
+              Make sure you are providing your API Key in the x-apikey header
+              of the request.
+        '5XX':
+          description: |
+                InternalError.
+          # $ref: '/api-spec/responses.yaml#/components/responses/Standard5XX'
+    get:
+      tags:
+        - virtualize
+      summary: Check Status of Virtualize Process
+      operationId: getProcessVirtualize
+      description: |
+        Retrieve the status of a processing job by job_id.
+      security:
+        - "x-apikey": []
+      parameters:
+        - name: job_id
+          in: query
+          description: Unique job_id for a submitted asynchronous processing job
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: |
+            Status of this job.  When completed successfully you can find the media file in the output location you provided.
+          content:
+            "application/json":
+              schema:
+                type: object
+                required:
+                  - status
+                  - path
+                  - progress
+                properties:
+                  status:
+                    type: string
+                    description: The status of the job while it is being processed.
+                    example: Pending
+                    enum:
+                      - Pending
+                      - Failed
+                      - Running
+                      - Success
+                      - InternalError
+                  path:
+                    type: string
+                    description: The endpoint you are using
+                    example: "/beta/media/process/virtualize"
+                  progress:
+                    type: integer
+                    description: An estimate of how much progress has been made processing the file
+                    example: 5
+                  error:
+                    type: object
+                    properties:
+                      title:
+                        type: string
+                        example: An internal service error has occurred
+                      type:
+                        type: string
+                        example: "/problems/internal-error"
+        '404':
+          description: |
+            The job for the given job_id was not found
+

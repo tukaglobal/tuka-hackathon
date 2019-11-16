@@ -1,0 +1,316 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "# Overview\n\n**Hackathon API Service**\n\nThis is the UMG hackathon API documentation. \n",
+      "version": "2019-11-11T18:04:00Z",
+      "title": "prod-InnovationLicenseService",
+      "termsOfService": "https://umusic.com",
+      "contact": {
+        "name": "Who?",
+        "email": "someone@umusic.com"
+      },
+      "license": {
+        "name": "license?",
+        "url": "https://umusic.com"
+      },
+      "x-logo": {
+        "url": "data:image/png;base64,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"
+      }
+    },
+    "host": "hackathon.umusic.com",
+    "basePath": "/prod",
+    "tags": [
+      {
+        "name": "Playlist",
+        "description": "Services to get playlists."
+      },
+      {
+        "name": "HLS",
+        "description": "Services to get HLS playlists."
+      },
+      {
+        "name": "DASH",
+        "description": "Services to get MPEG DASH playlists."
+      },
+      {
+        "name": "Cover",
+        "description": "Services to get album covers."
+      },
+      {
+        "name": "UPC",
+        "description": "Services to get resources by UPC."
+      },
+      {
+        "name": "ISRC",
+        "description": "Services to get resources by ISRC."
+      },
+      {
+        "name": "Encryption",
+        "description": "Services for stream decryption."
+      }
+    ],
+    "schemes": [
+      "https"
+    ],
+    "paths": {
+      "/v1/isrc/{isrc}/cover": {
+        "get": {
+          "tags": [
+            "Cover"
+          ],
+          "summary": "Cover by ISRC.",
+          "description": "Returns a url for the cover image for the given ISRC.",
+          "parameters": [
+            {
+              "name": "isrc",
+              "in": "path",
+              "description": "The ISRC by which to search for cover art.",
+              "required": true,
+              "type": "string",
+              "example": "USUMG1812345"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Cover URL"
+            },
+            "404": {
+              "description": "Requested resource not found"
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/v1/isrc/{isrc}/h264.mpd": {
+        "get": {
+          "tags": [
+            "Playlist",
+            "HLS"
+          ],
+          "summary": "HLS stream by token.",
+          "description": "Returns a media M3U8 playlist for the asset specified by the given ISRC.",
+          "parameters": [
+            {
+              "name": "isrc",
+              "in": "path",
+              "description": "The ISRC of the track desired.",
+              "required": true,
+              "type": "string",
+              "example": "USUMG1812345"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "HLS playlist created successfully. See https://developer.apple.com/streaming/ for details of response format."
+            },
+            "404": {
+              "description": "Requested resource not found"
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/v1/isrc/{isrc}/stream.m3u8": {
+        "get": {
+          "tags": [
+            "Playlist",
+            "DASH"
+          ],
+          "summary": "DASH by token.",
+          "description": "Returns a MPD playlist for the audio track specified by the given token.",
+          "parameters": [
+            {
+              "name": "isrc",
+              "in": "path",
+              "description": "The ISRC of the track desired.",
+              "required": true,
+              "type": "string",
+              "example": "USUMG1812345"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "DASH playlist created successfully. See http://dashif.org for details of response format."
+            },
+            "404": {
+              "description": "Requested resource not found"
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/v1/keys": {
+        "post": {
+          "tags": [
+            "Encryption"
+          ],
+          "summary": "Decryption keys by key IDs.",
+          "description": "Returns associated decryption keys for given key IDs.  Will return 404 if any of the requested key IDs are not found.\nKeys and IDs are base64url encoded, see https://www.rfc-editor.org/rfc/rfc7515.txt for details.\n",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "KeyJsonRequest",
+              "required": true,
+              "schema": {
+                "$ref": "#/definitions/KeyJsonRequest"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Keys retrieve successfully",
+              "schema": {
+                "$ref": "#/definitions/KeyJsonResponse"
+              }
+            },
+            "404": {
+              "description": "Requested resource not found"
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      },
+      "/v1/{metadata+}": {
+        "options": {
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response",
+              "schema": {
+                "$ref": "#/definitions/Empty"
+              },
+              "headers": {
+                "Access-Control-Allow-Origin": {
+                  "type": "string"
+                },
+                "Access-Control-Allow-Methods": {
+                  "type": "string"
+                },
+                "Access-Control-Allow-Headers": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-amazon-apigateway-any-method": {
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "metadata",
+              "in": "path",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "200 response"
+            }
+          },
+          "security": [
+            {
+              "api_key": []
+            }
+          ]
+        }
+      }
+    },
+    "securityDefinitions": {
+      "api_key": {
+        "type": "apiKey",
+        "name": "x-api-key",
+        "in": "header"
+      }
+    },
+    "definitions": {
+      "Empty": {
+        "type": "object",
+        "title": "Empty Schema"
+      },
+      "KeyJsonResponse": {
+        "type": "object",
+        "properties": {
+          "keys": {
+            "type": "object",
+            "properties": {
+              "kty": {
+                "type": "string",
+                "enum": [
+                  "oct"
+                ]
+              },
+              "kid": {
+                "type": "string",
+                "title": "Key ID",
+                "example": "ovdoFun15z4SZ1t9i7qMiQ"
+              },
+              "k": {
+                "type": "string",
+                "title": "Key value",
+                "example": "g2Gnh35Lq2saDhKqB51IZw"
+              }
+            }
+          },
+          "type": {
+            "type": "string",
+            "title": "Key type",
+            "enum": [
+              "temporary"
+            ]
+          }
+        },
+        "description": "Response to key request"
+      },
+      "KeyJsonRequest": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "title": "Key type",
+            "enum": [
+              "temporary"
+            ]
+          },
+          "kids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "title": "Key ID",
+              "example": "ovdoFun15z4SZ1t9i7qMiQ=="
+            }
+          }
+        },
+        "description": "Key request"
+      }
+    }
+  }
