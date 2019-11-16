@@ -1,68 +1,32 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# TUKA
+[Tuka](https://www.tukaglobal.com/) is an online  platform that helps creators find audiences, share their content, and get paid, while also helping consumers find the content they love, pay less for it, and rewards them for sharing content across their peer networks.
 
-## Available Scripts
+## Capitol360 Capitol Royale Hackathon
+At the [Capitol Royale Hackathon](https://www.capitolroyale.com/developers-apply
+), Tuka will use the APIs, especially the UMG API, which includes artist tracks to demonstrate its platform.  Songs from these APIs will be randomly assigned "shares" and "price" info so that they are rated in the app and appear in searches based on their number of shares.
 
-In the project directory, you can run:
+## User Stories
+Users are comprised of artists and fans. A curator is any user (artist or fan) who shares a snippet of content with their network and receives tokens if that shared snippet leads to a sale of the content.  
+For example, Super-Fan-Ashley LOVES Super-Musician-Jimmy. Jimmy shares a snippet of his hip new jam. Ashley is a follower of Jimmy and listens to the new snippet, she loves it, and purchases the song immediately.  Ashley is then allowed to share a snippet of that song with her own network of friends.  If any of Ashley's network also likes the snippet and goes to Jimmy's page to purchase the full song, Jimmy is paid for his content and Ashley receives tokens for that purchase crediting her for the sale. 
+1. Users will be able to create a secure login and a profile page.
+2. Users will be able to search and filter content snippets by genre keywords and search results will appear on the page.
+3. Artists will be able to upload snippets of their original content.
+4. Artists will be able to sell full original content to fans/curators.
+5. Fans/curators will be able to purchase content from snippets they like.
+6. Fans/curators will be able to share snippets of their purchased content with their network.
+    - the number of shares content receives by fans to their networks, the higher the content is ranked (i.e. it is returned first in searches before content with fewer shares)
+    - if those shares result in sales, the curator will earn token rewards
 
-### `npm start`
+## Technologies
+Javascript | HTML5 | CSS/SASS | React.js | MongoDB | Express.js  
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+The MERN-stack was selected by the product manager for its scalability and use of react's reusable components.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+## Team
+Michael Harrington - Tuka, Founder
+Craig Wilson - Tuka, Product Manager
+Brenton Jenkins - Tuka, UX/UI Designer
+Erin Johnson - Developer
+German Nunez - Developer
+Joe Domovitch - Developer
+Perice Pope - Developer
