@@ -1,0 +1,10 @@
+@mixin headline1 {
+  font-family: $default-font;
+  font-size: 26px;
+  color: $color-dark-coral;
+}
+
+@mixin headline2 {
+  font-family: $default-font;
+  font-size: 28px;
+}
