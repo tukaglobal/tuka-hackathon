@@ -3,8 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "body-parser": "^1.19.0",
     "cloudinary": "^1.17.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
     "express": "^4.16.4",
+    "express-session": "^1.17.0",
+    "mongoose": "^5.7.11",
     "node-fetch": "^2.6.0",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
@@ -13,7 +19,7 @@
     "yaml": "^1.7.1"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "PORT=3000 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
@@ -34,5 +40,17 @@
       "last 1 safari version"
     ]
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "description": "![logo](public/assets/logo.png) # TUKA [Tuka](https://www.tukaglobal.com/) is an online  platform that helps creators find audiences, share their content, and get paid, while also helping consumers find the content they love, pay less for it, and rewards them for sharing content across their peer networks.",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Germs31/tuka-hackathon.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Germs31/tuka-hackathon/issues"
+  },
+  "homepage": "https://github.com/Germs31/tuka-hackathon#readme"
 }
