@@ -1,3 +1,4 @@
+![logo](public/assets/logo.png)
 # TUKA
 [Tuka](https://www.tukaglobal.com/) is an online  platform that helps creators find audiences, share their content, and get paid, while also helping consumers find the content they love, pay less for it, and rewards them for sharing content across their peer networks.
 
@@ -27,7 +28,7 @@ For example, Super-Fan-Ashley LOVES Super-Musician-Jimmy. Jimmy shares a snippet
 ##### When a user hovers over the clip art for a particular snippet, buttons appear that allow the user to play or stop a snippet, or click through to the profile page of the artist that posted the snippet.
 ![hover_page](public/assets/on-hover.png)
 
-##### User Profile page will be the landing page for a logged in user - this page is not being built as part of the Hackathon, but this is to give an idea of the project's next step.
+##### User Profile page will be the landing page for a logged in user - *this page is not being built as part of the Hackathon,* but this is to give an idea of the project's next step.
 ![profile_page](public/assets/User-Profile-Page-1.jpg)
 
 ## Technologies
@@ -36,25 +37,10 @@ Javascript | HTML5 | CSS/SASS | React.js | MongoDB | Express.js
 The MERN-stack was selected by the product manager for its scalability and use of react's reusable components.
 
 ## Team
-Michael Harrington - Tuka, Founder
-Craig Wilson - Tuka, Product Manager
-Brenton Jenkins - Tuka, UX/UI Designer
-Erin Johnson - Developer
-German Nunez - Developer
-Joe Domovitch - Developer
-Perice Pope - Developer
-
-
-## Technologies
-Javascript | HTML5 | CSS/SASS | React.js | MongoDB | Express.js  
-
-The MERN-stack was selected by the product manager for its scalability and use of react's reusable components.
-
-## Team
-Michael Harrington - Tuka, Founder
-Craig Wilson - Tuka, Product Manager
-Brenton Jenkins - Tuka, UX/UI Designer
-Erin Johnson - Developer
-German Nunez - Developer
-Joe Domovitch - Developer
-Perice Pope - Developer
+- Michael Harrington - Tuka, Founder
+- Craig Wilson - Tuka, Product Manager
+- Brenton Jenkins - Tuka, UX/UI Designer
+- Erin Johnson - Developer
+- German Nunez - Developer
+- Joe Domovitch - Developer
+- Perice Pope - Developer
