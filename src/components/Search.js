@@ -14,13 +14,16 @@ class Search extends Component {
   render() {
     return (
       <div>
-          <section class="artists">
-            <form class="search-artists">
-              <input name="query" type="search" maxlength="100"/>
-              <button type="submit">Search Artists</button>
-            </form>
-            <ul id="artist-results"></ul>
-          </section>
+        <form className="search">
+          <input 
+          placeholder='Enter keyword, genre, or subgenre...'
+          maxLength="100"
+          ref={(input) => {this.search = input}}
+          onChange={this.handleInputChange}
+          />
+          <button type="submit">Search</button>
+        </form>
+        <ul id="artist-results"></ul>
       </div>
     )
 }
