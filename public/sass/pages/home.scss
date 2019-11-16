@@ -1,13 +1,3 @@
-* {
-  box-sizing: border-box;
-}
-
-body {
-  font-family: $default-font;
-  margin: 2em;
-  background-color: $color-grey;
-}
-
 h1 {
   @include headline1;
 }

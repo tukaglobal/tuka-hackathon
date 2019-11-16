@@ -1,0 +1,17 @@
+*,
+*:before,
+*:after {
+  font-size: 62.5%;       //1rem = 10px
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  backface-visibility: hidden;
+}
+
+body {
+  font-family: $default-font;
+  font-size: 1.4rem;
+  margin: 2em;
+  background-color: $color-grey;
+}
+
