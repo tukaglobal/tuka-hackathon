@@ -1,11 +1,11 @@
 import React from 'react';
 import './App.css';
-import Test from './components/Test';
+import Search from './components/Search';
 
 function App() {
   return (
     <div>
-      <Test/>
+      <Search/>
     </div>
   );
 }
