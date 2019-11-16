@@ -15,11 +15,7 @@ class Accordion extends Component {
   render() {
     return (
       <div className="accordion">
-        <button 
-        className={"accordion__button"}
-        onClick={this.toggleClass}>
-          <img src="../assets/arrow-right.png" className="" alt="accordion button"/>
-        </button>
+        <button className="accordion__button" onClick={this.toggleClass}>►</button>
       </div>
     )
   }

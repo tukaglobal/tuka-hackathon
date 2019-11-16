@@ -15,16 +15,21 @@ body {
   background-color: #C8C8C8; }
 
 .accordion {
-  height: 20rem;
+  height: 5rem;
   width: 100%;
   background: #FFFFFF;
   position: relative; }
   .accordion__button {
     position: absolute;
-    top: 20%;
+    top: 0%;
     left: 0%;
+    margin: 1rem 0 0 2rem;
     border: none;
-    background: transparent; }
+    background: transparent;
+    height: 1rem;
+    font-size: 2rem; }
+    .accordion__button:hover {
+      cursor: pointer; }
 
 .navbar {
   width: 100%;

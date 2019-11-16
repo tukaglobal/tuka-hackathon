@@ -1,15 +1,23 @@
 .accordion {
-  height: 20rem;
+  height: 5rem;
   width: 100%;
   background: $color-white;
   position: relative;
 
   &__button {
     position: absolute;
-    top: 20%;
+    top: 0%;
     left: 0%;
+    margin: 1rem 0 0 2rem;
     border: none;
     background: transparent;
+    // transform: rotate(45deg);
+    height: 1rem;
+    font-size: 2rem;
+
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 
