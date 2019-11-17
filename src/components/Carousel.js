@@ -39,8 +39,8 @@ class Carousel extends Component {
   handleLeftNav = (e) => {
     // console.log('left clicked')
     const { carouselViewport } = this.refs;
-    const numSlidesToScroll = 6;
-    const slideWidth = 177;
+    const numSlidesToScroll = 3;
+    const slideWidth = 85;
     const newPosition = carouselViewport.scrollLeft - (numSlidesToScroll * slideWidth);
     const timePerSlide = 300;
     const totalScrollTime = timePerSlide * numSlidesToScroll;
@@ -54,8 +54,8 @@ class Carousel extends Component {
   handleRightNav = (e) => {
     // console.log('right clicked')
     const { carouselViewport } = this.refs;
-    const numSlidesToScroll = 6;
-    const slideWidth = 177;
+    const numSlidesToScroll = 3;
+    const slideWidth = 85;
     const newPosition = carouselViewport.scrollLeft + (numSlidesToScroll * slideWidth);
     const timePerSlide = 300;
     const totalScrollTime = timePerSlide * numSlidesToScroll;

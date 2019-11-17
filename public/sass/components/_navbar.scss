@@ -30,6 +30,10 @@
     color: $color-light-coral;
     margin-top: 2.5rem;
     padding-right: 1rem;
+
+    @include respond($respond-900) {
+      visibility: hidden;
+    }
   }
 
   &__linklist {

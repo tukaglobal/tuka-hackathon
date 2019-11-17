@@ -141,18 +141,20 @@ class Search extends Component {
       <div className="search">
         <form className="search__form">
           <Fragment>
-          <input 
-          className="search__input"
-          placeholder='Enter keyword, genre, or artist'
-          type="text"
-          maxLength="100"
-          onChange={onChange}
-          onKeyDown={onKeyDown}
-          value={userInput}
-          />
+            <div className="search__wrapper">
+              <input 
+              className="search__input"
+              placeholder='Enter keyword, genre, or artist'
+              type="text"
+              maxLength="100"
+              onChange={onChange}
+              onKeyDown={onKeyDown}
+              value={userInput}
+              />
+              <button className="search__submit"><img src="../assets/search-icon.png" className="search__submit--icon" alt="search icon"/></button>
+            </div>
           {suggestionsListComponent}
           </Fragment>
-          <button className="search__submit"><img src="../assets/search-icon.png" className="search__submit--icon" alt="search icon"/></button>
         </form>
         <ul id="artist-results"></ul>
       </div>
