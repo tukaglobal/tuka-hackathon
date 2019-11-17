@@ -1,6 +1,6 @@
 import React, {Component} from "react";
-// import Slide from "./Slide";
- 
+import scrollTo from './CarouselScrollAnimate';
+
 class Carousel extends Component {
   state = {
     pics: [
@@ -24,22 +24,55 @@ class Carousel extends Component {
 
   renderSlides() {
     const slides = this.state.pics.map((item, index) => {
-      // return <Slide key={item.key} props={item}></Slide>
-      return <div className="carousel__slide"><img src={item} alt="artist pic" key={index}/></div>
+      return (
+        <div className="carousel__slide" key={index}>
+          <img src={item} alt="artist pic"/>
+        </div>
+      );
     })
     return slides;
+  }
+
+  handleLeftNav = (e) => {
+    console.log('left clicked')
+    const { carouselViewport } = this.refs;
+    const numSlidesToScroll = 6;
+    const slideWidth = 177;
+    const newPosition = carouselViewport.scrollLeft - (numSlidesToScroll * slideWidth);
+    const timePerSlide = 300;
+    const totalScrollTime = timePerSlide * numSlidesToScroll;
+    scrollTo({
+      element: carouselViewport, 
+      to: newPosition, 
+      duration: totalScrollTime, 
+      scrollDirection: 'scrollLeft'});
+  }
+  
+  handleRightNav = (e) => {
+    console.log('right clicked')
+    const { carouselViewport } = this.refs;
+    const numSlidesToScroll = 6;
+    const slideWidth = 177;
+    const newPosition = carouselViewport.scrollLeft + (numSlidesToScroll * slideWidth);
+    const timePerSlide = 300;
+    const totalScrollTime = timePerSlide * numSlidesToScroll;
+    scrollTo({
+      element: carouselViewport, 
+      to: newPosition, 
+      duration: totalScrollTime, 
+      scrollDirection: 'scrollLeft'});
   }
 
   render() {
     return (
       <div className="carousel">
-        <button className="carousel__button carousel__button--left">
+        <button className="carousel__button carousel__button--left" onClick={this.handleLeftNav}>
           <img src="../assets/arrow-left.png" alt="left arrow"/>
         </button>
-        <div className="carousel__viewport">
+        <div className="carousel__viewport" ref="carouselViewport">
           {this.renderSlides()}
         </div>
-        <button className="carousel__button carousel__button--right">
+        <button className="carousel__button carousel__button--right" onClick={this.handleRightNav}>
           <img src="../assets/arrow-right.png" alt="right arrow"/>
         </button>
       </div>

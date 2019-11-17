@@ -1,11 +1,11 @@
 .carousel {
   display: flex;
   margin-top: 10rem;
-  height: 12rem;
+  align-items: center;
+  vertical-align: middle;
+  height: max-content;
   width: 90%;
   margin: auto;
-  // position: relative;
-  // overflow: hidden;
 
   &__button {
     width: 2rem;
@@ -13,6 +13,11 @@
     background: transparent;
     outline: none;
     cursor: pointer;
+    transition: all .2s;
+
+    &:active {
+      transform: scale(.9);
+    }
 
     & img {
       height: 3rem;
@@ -27,7 +32,6 @@
   }
 
   &__viewport {
-    padding-top: 1.75rem;
     white-space: nowrap;
     overflow-y: hidden;
     overflow-x: auto;
@@ -39,21 +43,20 @@
 
   &__slide {
     display: inline-block;
-    vertical-align: top;
-    height: 8.5rem;
+    padding-top: 2.5rem;
+    height: 18rem;
     transition: all .3s;
     
     img {
       border-radius: 1rem;
-      height: 8.5rem;
+      height: $carousel-pic-height;
     }
     &:hover {
-      transform: scale(1.1);
+      transform: scale(1.03);
     }
-    
 
     &:not(:first-child) {
-      padding-left: 2rem;
+      padding-left: 5rem;
     }
   }
 }
