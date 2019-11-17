@@ -12,6 +12,30 @@ class App extends Component {
     isLogged: false
   };
 
+const suggestions = [
+        "alternative_pop",
+        "alternative_rock",
+        "blues",
+        "brazillian",
+        "classic_pop",
+        "classic_rock",
+        "classical",
+        "country",
+        "dance",
+        "electronic",
+        "folk",
+        "gospel",
+        "hiphop",
+        "jazz",
+        "latin",
+        "metal",
+        "modern_pop",
+        "pop_rock",
+        "reggae",
+        "rnb",
+        "spoken"
+      ]
+
   signUp = async(data) => {
     try {
       const signUpResponse = await fetch('http://localhost:3030/user/signUp', {
@@ -33,12 +57,11 @@ class App extends Component {
     return (
       <div className="container">
       <Navbar/>
-        <main>
+      <Search suggestions={this.suggestions}
+      />
           <Switch>
             <Route exact path="/signUp" render={(props) => <SignUp {...props} signUp={this.signUp}/>}/>
           </Switch>
-        </main>
-        <Search/>
         <Accordion/>
       </div>
     );
