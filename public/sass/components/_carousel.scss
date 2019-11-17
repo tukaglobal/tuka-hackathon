@@ -1,0 +1,62 @@
+.carousel {
+  display: flex;
+  margin-top: 10rem;
+  align-items: center;
+  vertical-align: middle;
+  height: max-content;
+  width: 90%;
+  margin: auto;
+
+  &__button {
+    width: 2rem;
+    border: none;
+    background: transparent;
+    outline: none;
+    cursor: pointer;
+    transition: all .2s;
+
+    &:active {
+      transform: scale(.9);
+    }
+
+    & img {
+      height: 3rem;
+    }
+
+    &--left {
+      margin-right: 2rem;
+    }
+    &--right {
+      margin-left: 2rem;
+    }
+  }
+
+  &__viewport {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  &__slide {
+    display: inline-block;
+    padding-top: 2.5rem;
+    height: 18rem;
+    transition: all .3s;
+    
+    img {
+      border-radius: 1rem;
+      height: $carousel-pic-height;
+    }
+    &:hover {
+      transform: scale(1.03);
+    }
+
+    &:not(:first-child) {
+      padding-left: 5rem;
+    }
+  }
+}
