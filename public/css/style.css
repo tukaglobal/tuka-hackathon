@@ -16,9 +16,7 @@ body {
 
 .container {
   width: 100%;
-  position: relative;
-  padding: 0;
-  margin: 0; }
+  position: relative; }
 
 .accordion {
   height: 5rem;
@@ -77,7 +75,8 @@ body {
     font-size: 2.5rem;
     font-style: italic;
     color: #F56C6C;
-    margin-top: 2.5rem; }
+    margin-top: 2.5rem;
+    padding-right: 1rem; }
   .navbar__linklist {
     list-style: none;
     display: flex;
@@ -102,6 +101,28 @@ body {
 
 .search-container {
   width: 50%;
+  position: absolute;
+  left: 25%;
   margin: auto;
-  height: 50rem;
+  margin-top: -11rem;
+  height: max-content;
   text-align: center; }
+  .search-container__input {
+    border-radius: 5rem;
+    border: none;
+    line-height: 3.5rem;
+    width: 60%;
+    font-size: 1.6rem;
+    padding: 0 2rem;
+    outline: none; }
+  .search-container__submit {
+    border: none;
+    background: transparent;
+    position: absolute;
+    top: 20%;
+    right: 22%;
+    outline: none; }
+    .search-container__submit:hover {
+      cursor: pointer; }
+  .search-container__submit--icon {
+    height: 2rem; }

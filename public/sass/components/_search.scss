@@ -1,7 +1,37 @@
 .search-container {
   width: 50%;
+  position: absolute;
+  left: 25%;
   margin: auto;
-  height: 50rem;
-
+  margin-top: -11rem;
+  height: max-content;
+  
   text-align: center;
+  
+  &__input {
+    border-radius: 5rem;
+    border: none;
+    line-height: 3.5rem;
+    width: 60%;
+    font-size: 1.6rem;
+    padding: 0 2rem;
+    outline: none;
+  }
+
+  &__submit {
+    border: none;
+    background: transparent;
+    position: absolute;
+    top: 20%;
+    right: 22%;
+    outline: none;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  &__submit--icon {
+    height: 2rem;
+  }
 }

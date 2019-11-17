@@ -9,8 +9,8 @@ function App() {
   return (
     <div className="container">
       <Navbar/>
-      <SignUp/>
       <Search/>
+      <SignUp/>
       <Accordion/>
     </div>
   );
