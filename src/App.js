@@ -6,7 +6,6 @@ import Accordion from './components/Accordion';
 import SignUp from './components/SignUp';
 import {Route, Switch, withRouter} from 'react-router-dom'
 
-<<<<<<< HEAD
 class App extends Component {
   state={
     user: null,
@@ -32,28 +31,18 @@ class App extends Component {
 
   render(){
     return (
-      <div>
-        <Navbar/>
+      <div className="container">
+      <Navbar/>
         <main>
           <Switch>
             <Route exact path="/signUp" render={(props) => <SignUp {...props} signUp={this.signUp}/>}/>
           </Switch>
         </main>
         <Search/>
+        <Accordion/>
       </div>
     );
   };
-=======
-function App() {
-  return (
-    <div className="container">
-      <Navbar/>
-      <Search/>
-      <SignUp/>
-      <Accordion/>
-    </div>
-  );
->>>>>>> ea8ac5216c5c9e7bb2f3ff6100595e4afe996d6e
 }
 
 export default withRouter(App);
