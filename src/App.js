@@ -33,13 +33,11 @@ class App extends Component {
     return (
       <div className="container">
       <Navbar/>
-        <main>
+      <Search/>
           <Switch>
             <Route exact path="/signUp" render={(props) => <SignUp {...props} signUp={this.signUp}/>}/>
           </Switch>
-        </main>
-        <Search/>
-        <Accordion/>
+      <Accordion/>
       </div>
     );
   };

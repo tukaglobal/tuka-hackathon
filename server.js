@@ -12,6 +12,7 @@ const userRouter = require('./controller/user');
 
 require('dotenv').config();
 require('./db/db');
+require('./db/tracks-db')
 
 // const api = require('./api');
 const tracksRouter = require('./controller/tracks')
@@ -31,7 +32,7 @@ app.use(session({
 
 
 const corsOptions = {
-  origin: ['http://localhost:3000'],
+  origin: ['http://localhost:3000' || 'http://localhost:3030'],
   credentials: true, 
   optionsSuccessStatus: 200,
 };

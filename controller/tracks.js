@@ -1,11 +1,10 @@
 const express = require('express');
 const router = express.Router();
-const Tracks = require('../models/tracks')
 
-router.get('/', async (req, res) => {
-    console.log(req.body, 'hello')
+router.get('/tracks', async (req, res) => {
     try {
         const foundTracks = await Tracks.find();
+        console.log(foundTracks, 'foundTracks')
         res.json({
             status: {
                 code: 200,

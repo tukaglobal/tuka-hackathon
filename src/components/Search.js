@@ -5,15 +5,15 @@ class Search extends Component {
 
   state = {
     query: '',
+    genres: []
   }
 
   componentDidMount() {
     this.getGenres()
+    this.getTracks()
   }
 
-  getTracks = async () => {
-    const tracks = await fetch('http://localhost:3030')
-  }
+  
 
   getGenres = async () => {
     try {
