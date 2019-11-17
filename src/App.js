@@ -7,7 +7,7 @@ import SignUp from './components/SignUp';
 import {Route, Switch, withRouter} from 'react-router-dom'
 
 class App extends Component {
-  state={
+  state= {
     user: null,
     isLogged: false
   };
@@ -32,7 +32,7 @@ class App extends Component {
   render(){
     return (
       <div className="container">
-      <Navbar/>
+        <Navbar/>
         <main>
           <Switch>
             <Route exact path="/signUp" render={(props) => <SignUp {...props} signUp={this.signUp}/>}/>

@@ -1,12 +1,15 @@
 .accordion {
+  display: flex;
+  justify-content: center;
   height: 5rem;
   width: 100%;
   background: $color-white;
   position: relative;
   transition: height .3s;
+  overflow: hidden;
 
   &--expand {
-    height: 20rem;
+    height: 18rem;
   }
 
   &__button {
