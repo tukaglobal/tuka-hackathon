@@ -38,7 +38,30 @@ class App extends Component {
             <Route exact path="/signUp" render={(props) => <SignUp {...props} signUp={this.signUp}/>}/>
           </Switch>
         </main>
-        <Search/>
+        <Search  suggestions={[
+        "alternative_pop",
+        "alternative_rock",
+        "blues",
+        "brazilian",
+        "classic_pop",
+        "classic_rock",
+        "classical",
+        "country",
+        "dance",
+        "electronic",
+        "folk",
+        "gospel",
+        "hiphop",
+        "jazz",
+        "latin",
+        "metal",
+        "modern_pop",
+        "pop_rock",
+        "reggae",
+        "rnb",
+        "spoken"
+      ]}
+        />
         <Accordion/>
       </div>
     );
