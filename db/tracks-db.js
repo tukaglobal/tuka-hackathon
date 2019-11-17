@@ -16,16 +16,101 @@ MongoClient.connect("mongodb://localhost:27017/tracks", function(err, client) {
   if(!err) {
       const db = client.db('tracks')
     console.log("We are connected");
-    console.log(db, 'db')
     const collection = db.collection('tracks');
-    const findOneTrack = collection.findOne({"isrc": "USDW10500170"}, (findErr, result) => {
-        if (findErr) throw findErr;
-        console.log(result, 'result')
-    })
-    // console.log(collection, 'mongo collection')
-    console.log(findOneTrack, 'find one!')
-  }
-});
+
+    //find many
+    collection.find().toArray((findErr, result) => {
+        if (!findErr) {
+            const genreAltPop = []
+            const genreAltRock = []
+            const genreBlues = []
+            const genreBrazillian = []
+            const genreClassicPop = []
+            const genreClassicRock = []
+            const genreClassical = []
+            const genreCountry = []
+            const genreDance = []
+            const genreElectronic = []
+            const genreFolk = []
+            const genreGospel = []
+            const genreHipHop = []
+            const genreJazz = []
+            const genreLatin = []
+            const genreMetal = []
+            const genreModernPop = []
+            const genrePopRock = []
+            const genreReggae = []
+            const genreRnB = []
+            const genreSpoken = []
+            const newMap = result.map((e, i) => {
+                    if (e.genre.alternative_pop !== 0) {
+                        genreAltPop.push(e.isrc)
+                    }                                       
+                    if (e.genre.alternative_rock !== 0) {
+                        genreAltRock.push(e.isrc)
+                    }                                       
+                    if (e.genre.blues !== 0) {
+                        genreBlues.push(e.isrc)
+                    }                                       
+                    if (e.genre.brazillian !== 0) {
+                        genreBrazillian.push(e.isrc)
+                    }                                       
+                    if (e.genre.classic_pop !== 0) {
+                        genreClassicPop.push(e.isrc)
+                    }                                       
+                    if (e.genre.classic_rock !== 0) {
+                        genreClassicRock.push(e.isrc)
+                    }                                       
+                    if (e.genre.classical !== 0) {
+                        genreClassical.push(e.isrc)
+                    }                                       
+                    if (e.genre.country !== 0) {
+                        genreCountry.push(e.isrc)
+                    }                                       
+                    if (e.genre.dance !== 0) {
+                        genreDance.push(e.isrc)
+                    }                                       
+                    if (e.genre.electronic !== 0) {
+                        genreElectronic.push(e.isrc)
+                    }                                       
+                    if (e.genre.folk !== 0) {
+                        genreFolk.push(e.isrc)
+                    }                                       
+                    if (e.genre.gospel !== 0) {
+                        genreGospel.push(e.isrc)
+                    }                                       
+                    if (e.genre.hiphop !== 0) {
+                        genreHipHop.push(e.isrc)
+                    }                                       
+                    if (e.genre.jazz !== 0) {
+                        genreJazz.push(e.isrc)
+                    }                                       
+                    if (e.genre.latin !== 0) {
+                        genreLatin.push(e.isrc)
+                    }                                       
+                    if (e.genre.metal !== 0) {
+                        genreMetal.push(e.isrc)
+                    }                                       
+                    if (e.genre.modern_pop !== 0) {
+                        genreModernPop.push(e.isrc)
+                    }                                       
+                    if (e.genre.pop_rock !== 0) {
+                        genrePopRock.push(e.isrc)
+                    }                                       
+                    if (e.genre.reggae !== 0) {
+                        genreReggae.push(e.isrc)
+                    }                                       
+                    if (e.genre.rnb !== 0) {
+                        genreRnB.push(e.isrc)
+                    }                                       
+                    if (e.genre.spoken !== 0) {
+                        genreSpoken.push(e.isrc)
+                    }                                 
+                })
+            }
+        })
+    }
+})
 
 
 // getTracks = async ( => {
