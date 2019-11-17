@@ -39,7 +39,7 @@ class Search extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="search-container">
         <form className="search">
           <input 
           placeholder='Enter keyword, genre, or subgenre...'

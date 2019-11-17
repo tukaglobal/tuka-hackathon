@@ -14,6 +14,12 @@ body {
   margin: 2em;
   background-color: #C8C8C8; }
 
+.container {
+  width: 100%;
+  position: relative;
+  padding: 0;
+  margin: 0; }
+
 .accordion {
   height: 5rem;
   width: 100%;
@@ -93,3 +99,9 @@ body {
     width: 94%;
     height: 2.5rem;
     margin-bottom: 1.5rem; }
+
+.search-container {
+  width: 50%;
+  margin: auto;
+  height: 50rem;
+  text-align: center; }
