@@ -109,13 +109,13 @@ class Search extends Component {
     if (showSuggestions && userInput) {
       if (filteredSuggestions.length) {
         suggestionsListComponent = (
-          <ul class="suggestions">
+          <ul className="search__suggestions">
             {filteredSuggestions.map((suggestion, index) => {
               let className;
 
               // Flag the active suggestion with a class
               if (index === activeSuggestion) {
-                className = "suggestion-active";
+                className = "search__suggestion-active";
               }
 
               return (
@@ -128,7 +128,7 @@ class Search extends Component {
         );
       } else {
         suggestionsListComponent = (
-          <div class="no-suggestions">
+          <div class="search__no-suggestions">
             <em>No suggestions, try a genre!</em>
           </div>
         );
@@ -138,11 +138,11 @@ class Search extends Component {
 // old return and new return below... 
 
     return (
-      <div className="search-container">
-        <form className="search">
+      <div className="search">
+        <form className="search__form">
           <Fragment>
           <input 
-          className="search-container__input"
+          className="search__input"
           placeholder='Enter keyword, genre, or artist'
           type="text"
           maxLength="100"
@@ -152,7 +152,7 @@ class Search extends Component {
           />
           {suggestionsListComponent}
           </Fragment>
-          <button className="search-container__submit"><img src="../assets/search-icon.png" className="search-container__submit--icon" alt="search icon"/></button>
+          <button className="search__submit"><img src="../assets/search-icon.png" className="search__submit--icon" alt="search icon"/></button>
         </form>
         <ul id="artist-results"></ul>
       </div>

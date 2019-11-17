@@ -63,6 +63,10 @@ class App extends Component {
       ]}
         />
         <Accordion/>
+        <Accordion/>
+        <Accordion/>
+        <Accordion/>
+        <Accordion/>
       </div>
     );
   };

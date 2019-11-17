@@ -37,7 +37,7 @@ class Carousel extends Component {
   }
 
   handleLeftNav = (e) => {
-    console.log('left clicked')
+    // console.log('left clicked')
     const { carouselViewport } = this.refs;
     const numSlidesToScroll = 6;
     const slideWidth = 177;
@@ -52,7 +52,7 @@ class Carousel extends Component {
   }
   
   handleRightNav = (e) => {
-    console.log('right clicked')
+    // console.log('right clicked')
     const { carouselViewport } = this.refs;
     const numSlidesToScroll = 6;
     const slideWidth = 177;
@@ -67,12 +67,13 @@ class Carousel extends Component {
   }
 
   render() {
+    console.log(this.props, "<--carousel props")
     return (
       <div className="carousel">
         <button className="carousel__button carousel__button--left" onClick={this.handleLeftNav}>
           <img src="../assets/arrow-left.png" alt="left arrow"/>
         </button>
-        <div className="carousel__viewport" ref="carouselViewport">
+        <div className={this.props.active ? "carousel__viewport" : "carousel__viewport--hide"} ref="carouselViewport">
           {this.renderSlides()}
         </div>
         <button className="carousel__button carousel__button--right" onClick={this.handleRightNav}>
