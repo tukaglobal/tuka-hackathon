@@ -34,6 +34,30 @@ class Search extends Component {
       suggestion =>
         suggestion.toLowerCase().indexOf(userInput.toLowerCase()) > -1
     );
+  getTracks = async () => {
+    const tracks = await fetch('http://localhost:3030')
+  }
+
+  getGenres = async () => {
+    try {
+      const genres = await fetch(`https://hackathon.umusic.com/prod/v1/tracks`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'x-api-key': 'xmN6Ijjcxy1GzOGsOcu1a6EpbSden1c64P3r5bQh',
+          'Access-Control-Allow-Origin': '*'
+        }
+      })
+      const genresJSON = await genres.json();
+      console.log(genresJSON.tracks[2], 'genresJSON')
+      this.setState({query: genresJSON}, () => {
+        console.log(this.state.query)
+      })
+      
+    } catch (error) {
+      console.log(error, "error in catch")
+    }
+  } 
 
     this.setState({
       activeSuggestion: 0,
@@ -126,17 +150,21 @@ class Search extends Component {
     }
 
     return (
-      <div>
-      <Fragment>
+        <div className="search-container">      
+        <Fragment>
         <input
           type="text"
+          className="search-container__input"
+          placeholder='Enter keyword, genre, or subgenre...'
+          maxLength="100"
           onChange={onChange}
           onKeyDown={onKeyDown}
           value={userInput}
         />
         {suggestionsListComponent}
       </Fragment>
-      <button type="submit">Search</button>
+          <button className="search-container__submit"><img src="../assets/search-icon.png" className="search-container__submit--icon" alt="search icon"/></button>
+              <ul id="artist-results"></ul>
       </div>
     );
   }
