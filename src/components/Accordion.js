@@ -16,7 +16,7 @@ class Accordion extends Component {
     return (
       <div className={this.state.active ? "accordion accordion--expand" : "accordion"}>
         <button className="accordion__button" onClick={this.toggleClass}>
-          <img src="../../assets/arrow-right.png" alt="arrow right button" className={this.state.active ? "accordion__icon accordion__icon--rotate" : "accordion__icon"}/>
+          <img src="../../assets/accordion-up.png" alt="button" className={this.state.active ? "accordion__icon accordion__icon--rotate" : "accordion__icon"}/>
         </button>
       </div>
     )
