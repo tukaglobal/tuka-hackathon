@@ -5,15 +5,16 @@ class Search extends Component {
 
   state = {
     query: '',
+    results: []
   }
 
   componentDidMount() {
     this.getGenres()
   }
 
-  getGenres = async () => {
+  getGenres = () => {
     try {
-      const genres = await fetch(`https://hackathon.umusic.com/prod/v1/tracks`, {
+      const genres = fetch(`https://hackathon.umusic.com/prod/v1/tracks`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -21,7 +22,7 @@ class Search extends Component {
           'Access-Control-Allow-Origin': '*'
         }
       })
-      const genresJSON = await genres.json();
+      const genresJSON = genres.json();
       console.log(genresJSON.tracks[2]['isrc'], 'genresJSON')
       this.setState({query: genresJSON}, () => {
         console.log(this.state.query)
@@ -35,8 +36,15 @@ class Search extends Component {
   handleInputChange = () => {
     this.setState({
       query: this.search.value
-    })
-  }
+    }, () => {
+      if (this.state.query && this.state.query.length > 1) {
+        if (this.state.query.length % 2 === 0) {
+          this.getGenres()
+        }
+      } 
+  })
+}
+
   render() {
     return (
       <div>
@@ -48,6 +56,7 @@ class Search extends Component {
           onChange={this.handleInputChange}
           />
           <button type="submit">Search</button>
+          <div>{this.state.query}</div>
         </form>
         <ul id="artist-results"></ul>
       </div>
