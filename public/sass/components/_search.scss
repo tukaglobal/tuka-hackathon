@@ -1,4 +1,4 @@
-.search-container {
+.search {
   width: 50%;
   position: absolute;
   left: 25%;
@@ -22,8 +22,8 @@
     border: none;
     background: transparent;
     position: absolute;
-    top: 20%;
-    right: 22%;
+    top: .8rem;
+    right: 14rem;
     outline: none;
 
     &:hover {
@@ -31,7 +31,47 @@
     }
   }
 
+  &__suggestions,
+  &__no-suggestions {
+    width: 55%;
+    margin: auto;
+    list-style: none;
+    background: $color-white;
+    text-align: left;
+    padding: 1rem;
+    font-size: 1.4rem;
+    border-radius: 0 0 .25rem .25rem;
+    max-height: 5rem;
+    overflow-y: scroll;
+    z-index: 100;
+  }
+
+  & li,
+  & em {
+    font-size: 1.2rem;
+
+    &:not(:last-child) {
+      padding-bottom: .5rem;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $color-dark-coral;
+    }
+  }
+
   &__submit--icon {
     height: 2rem;
   }
+}
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0,0,0,.5);
+  -webkit-box-shadow: 0 0 1px rgba(255,255,255,.5);
 }

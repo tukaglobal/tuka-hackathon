@@ -21,41 +21,41 @@ body {
 .accordion {
   display: flex;
   justify-content: center;
-  height: 5rem;
+  height: 7.5vh;
   width: 100%;
   background: #FFFFFF;
   position: relative;
   transition: height .3s;
   overflow: hidden; }
   .accordion--expand {
-    height: 25rem; }
+    height: 20vh; }
   .accordion__button {
     position: relative;
     top: 0;
     left: 0;
     margin-left: 2rem;
-    margin-top: 1.5rem;
+    margin-top: 1.75rem;
     border: none;
     background: transparent;
-    height: 1rem;
+    height: 2rem;
     font-size: 10rem;
     outline: none; }
     .accordion__button img {
       position: absolute;
       top: 10%;
       left: 2%;
-      height: 1.5rem; }
+      height: .75rem; }
     .accordion__button:hover {
       cursor: pointer; }
   .accordion__icon {
     transition: transform .3s;
-    transform: rotate(180deg); }
+    transform: rotate(90deg); }
     .accordion__icon--rotate {
-      transform: rotate(0deg); }
+      transform: rotate(180deg); }
 
 .carousel {
   display: flex;
-  margin-top: 10rem;
+  margin-top: 5rem;
   align-items: center;
   vertical-align: middle;
   height: max-content;
@@ -71,7 +71,7 @@ body {
     .carousel__button:active {
       transform: scale(0.9); }
     .carousel__button img {
-      height: 3rem; }
+      height: 1.5rem; }
     .carousel__button--left {
       margin-right: 2rem; }
     .carousel__button--right {
@@ -79,21 +79,27 @@ body {
   .carousel__viewport {
     white-space: nowrap;
     overflow-y: hidden;
-    overflow-x: auto; }
+    overflow-x: auto;
+    opacity: 1;
+    transition: opacity .5s;
+    transition-delay: .1s; }
     .carousel__viewport::-webkit-scrollbar {
       display: none; }
+    .carousel__viewport--hide {
+      opacity: 0; }
   .carousel__slide {
     display: inline-block;
-    padding-top: 2.5rem;
-    height: 18rem;
+    padding-top: 1.25rem;
+    height: 9rem;
     transition: all .3s; }
     .carousel__slide img {
       border-radius: 1rem;
-      height: 13rem; }
+      height: 6.5rem;
+      cursor: pointer; }
     .carousel__slide:hover {
       transform: scale(1.03); }
     .carousel__slide:not(:first-child) {
-      padding-left: 5rem; }
+      padding-left: 2.5rem; }
 
 .navbar {
   width: 100%;
@@ -144,7 +150,7 @@ body {
     height: 2.5rem;
     margin-bottom: 1.5rem; }
 
-.search-container {
+.search {
   width: 50%;
   position: absolute;
   left: 25%;
@@ -152,7 +158,7 @@ body {
   margin-top: -11rem;
   height: max-content;
   text-align: center; }
-  .search-container__input {
+  .search__input {
     border-radius: 5rem;
     border: none;
     line-height: 3.5rem;
@@ -160,14 +166,45 @@ body {
     font-size: 1.6rem;
     padding: 0 2rem;
     outline: none; }
-  .search-container__submit {
+  .search__submit {
     border: none;
     background: transparent;
     position: absolute;
-    top: 20%;
-    right: 22%;
+    top: .8rem;
+    right: 14rem;
     outline: none; }
-    .search-container__submit:hover {
+    .search__submit:hover {
       cursor: pointer; }
-  .search-container__submit--icon {
+  .search__suggestions, .search__no-suggestions {
+    width: 55%;
+    margin: auto;
+    list-style: none;
+    background: #FFFFFF;
+    text-align: left;
+    padding: 1rem;
+    font-size: 1.4rem;
+    border-radius: 0 0 .25rem .25rem;
+    max-height: 5rem;
+    overflow-y: scroll;
+    z-index: 100; }
+  .search li,
+  .search em {
+    font-size: 1.2rem; }
+    .search li:not(:last-child),
+    .search em:not(:last-child) {
+      padding-bottom: .5rem; }
+    .search li:hover,
+    .search em:hover {
+      cursor: pointer;
+      color: #D95457; }
+  .search__submit--icon {
     height: 2rem; }
+
+::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 10px; }
+
+::-webkit-scrollbar-thumb {
+  border-radius: 5px;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-box-shadow: 0 0 1px rgba(255, 255, 255, 0.5); }
