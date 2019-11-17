@@ -19,6 +19,7 @@
     background: transparent;
     height: 1rem;
     font-size: 10rem;
+    outline: none;
 
     & img {
       position: absolute;
@@ -27,15 +28,16 @@
       height: 2rem;
     }
     
-    &--icon {
-
-    }
-    
     &:hover {
-      // transform: rotate(90deg);
       cursor: pointer;
     }
-
   }
+    &__icon {
+      transition: transform .3s;
+
+      &--rotate {
+        transform: rotate(90deg);
+      }
+    }
 }
 
