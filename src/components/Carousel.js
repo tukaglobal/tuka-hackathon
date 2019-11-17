@@ -19,6 +19,9 @@ class Carousel extends Component {
       "http://placehold.jp/85x85.png",
       "http://placehold.jp/85x85.png",
       "http://placehold.jp/85x85.png",
+      "http://placehold.jp/85x85.png",
+      "http://placehold.jp/85x85.png",
+      "http://placehold.jp/85x85.png",
     ]
   }
 

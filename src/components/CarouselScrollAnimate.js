@@ -3,7 +3,7 @@ function scrollTo(params ) {
   
   let start = element[scrollDirection];
   let change = to - start;
-  let increment = (1000/60);
+  let increment = (750/60);
 
   const animateScroll = function(elapsedTime) {        
       elapsedTime += increment;
