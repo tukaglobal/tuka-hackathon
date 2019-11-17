@@ -40,7 +40,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 app.use('/user',userRouter);
-app.use('/tracks',tracksRouter)
+// app.use('/tracks',tracksRouter)
 
 // listen for requests :)
 app.listen(PORT, (err) => {

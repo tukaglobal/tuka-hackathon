@@ -4,20 +4,18 @@ import React, { Component } from 'react';
 class Search extends Component {
 
   state = {
-    query: '',
+    tracks: [],
+    trackMetadata: []
   }
 
   componentDidMount() {
-    this.getGenres()
+    this.getTracks()
+    this.getTrackMetadata()
   }
 
   getTracks = async () => {
-    const tracks = await fetch('http://localhost:3030')
-  }
-
-  getGenres = async () => {
     try {
-      const genres = await fetch(`https://hackathon.umusic.com/prod/v1/tracks`, {
+      const tracks = await fetch(`https://hackathon.umusic.com/prod/v1/tracks`, {
         headers: {
           'Accept': 'application/json',
           'Content-Type': 'application/json',
@@ -25,10 +23,31 @@ class Search extends Component {
           'Access-Control-Allow-Origin': '*'
         }
       })
-      const genresJSON = await genres.json();
-      console.log(genresJSON.tracks[2]['isrc'], 'genresJSON')
-      this.setState({query: genresJSON}, () => {
-        console.log(this.state.query)
+      const tracksJSON = await tracks.json();
+      console.log(tracksJSON.tracks[2], 'tracksJSON')
+      this.setState({tracks: tracksJSON}, () => {
+        console.log(this.state.tracks)
+      })
+      
+    } catch (error) {
+      console.log(error, "error in catch")
+    }
+  } 
+  //test with a specific ISRC just to see the data set
+  getTrackMetadata = async () => {
+    try {
+      const trackMetadata = await fetch(`https://hackathon.umusic.com/prod/v1/tracks/USKRS0326911`, {
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+          'x-api-key': 'xmN6Ijjcxy1GzOGsOcu1a6EpbSden1c64P3r5bQh',
+          'Access-Control-Allow-Origin': '*'
+        }
+      })
+      const trackMetadataJSON = await trackMetadata.json();
+      console.log(trackMetadataJSON.track.creative, 'tracksJSON')
+      this.setState({trackMetadata: trackMetadataJSON}, () => {
+        console.log(this.state.trackMetadata)
       })
       
     } catch (error) {

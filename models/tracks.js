@@ -1,22 +1,3 @@
-function MongoDao(mongoUri, dbname) {
-    let _this = this;
-    let options = {
-        useNewUrlParser: true
-    };
-    _this.mongoClient = new MongoClient(process.env.MONGODB_URI, options);
-    return new Promise((resolve, reject) => {
-        _this.mongoClient.connect((err, client) => {
-            assert.equal(err, null);
-            console.log("mongo client successfully connected")
-            _this.dbConnection = _this.mongoClient.db(tuka);
-            resolve(_this)
-        })
-    })
-    
-}
-
-
-
 // const mongoose = require('mongoose');
 
 // const TracksSchema = new mongoose.Schema({
