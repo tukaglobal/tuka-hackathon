@@ -33,34 +33,12 @@ class App extends Component {
     return (
       <div className="container">
       <Navbar/>
+        <main>
           <Switch>
             <Route exact path="/signUp" render={(props) => <SignUp {...props} signUp={this.signUp}/>}/>
           </Switch>
-      <Accordion/>
-      <Search suggestions={[
-        "alternative_pop",
-        "alternative_rock",
-        "blues",
-        "brazillian",
-        "classic_pop",
-        "classic_rock",
-        "classical",
-        "country",
-        "dance",
-        "electronic",
-        "folk",
-        "gospel",
-        "hiphop",
-        "jazz",
-        "latin",
-        "metal",
-        "modern_pop",
-        "pop_rock",
-        "reggae",
-        "rnb",
-        "spoken"
-        ]}
-      />
+        </main>
+        <Search/>
         <Accordion/>
       </div>
     );

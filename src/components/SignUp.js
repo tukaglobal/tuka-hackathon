@@ -28,7 +28,6 @@ class SignUp extends Component {
        console.log(this.state)
        return(
            <div>
-
                <form onSubmit={this.handleSubmit}>
                    <input type='text' name="email" placeholder='Email' onChange={this.handleChange} value={this.state.email}/>
                    <input type='text' name="confirmEmail" placeholder='Confirm Email' onChange={this.handleChange} value={this.state.confirmEmail}/>
