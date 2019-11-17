@@ -11,6 +11,10 @@ class Search extends Component {
     this.getGenres()
   }
 
+  getTracks = async () => {
+    const tracks = await fetch('http://localhost:3030')
+  }
+
   getGenres = async () => {
     try {
       const genres = await fetch(`https://hackathon.umusic.com/prod/v1/tracks`, {
