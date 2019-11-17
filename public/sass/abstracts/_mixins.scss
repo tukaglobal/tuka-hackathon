@@ -8,3 +8,11 @@
   font-family: $default-font;
   font-size: 28px;
 }
+
+//MEDIA QUERIES
+
+@mixin respond($breakpoint) {
+  @if $breakpoint == $respond-900 {
+    @media only screen and (max-width: $respond-900) {@content};
+  }
+}
