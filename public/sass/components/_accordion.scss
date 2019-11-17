@@ -3,21 +3,39 @@
   width: 100%;
   background: $color-white;
   position: relative;
+  transition: height .3s;
+
+  &--expand {
+    height: 20rem;
+  }
 
   &__button {
-    position: absolute;
-    top: 0%;
-    left: 0%;
-    margin: 1rem 0 0 2rem;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin-left: 2rem;
+    margin-top: 1rem;
     border: none;
     background: transparent;
-    // transform: rotate(45deg);
     height: 1rem;
-    font-size: 2rem;
+    font-size: 10rem;
 
+    & img {
+      position: absolute;
+      top: 4%;
+      left: 2%;
+      height: 2rem;
+    }
+    
+    &--icon {
+
+    }
+    
     &:hover {
+      // transform: rotate(90deg);
       cursor: pointer;
     }
+
   }
 }
 
