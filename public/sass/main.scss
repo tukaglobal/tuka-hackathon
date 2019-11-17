@@ -6,7 +6,9 @@
 @import "./base/base";
 
 //COMPONENTS 
+@import "./components/accordion";
 @import "./components/navbar";
+@import "./components/search";
 
 //MAIN PAGE
 @import "./pages/home";
