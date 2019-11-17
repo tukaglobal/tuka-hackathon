@@ -16,12 +16,11 @@ class Accordion extends Component {
 
   render() {
     return (
-      // <div className={this.state.active ? "accordion accordion--expand" : "accordion"}>
-      <div className="accordion accordion--expand">
+      <div className={this.state.active ? "accordion accordion--expand" : "accordion"}>
         <button className="accordion__button" onClick={this.toggleClass}>
           <img src="../../assets/accordion-up.png" alt="button" className={this.state.active ? "accordion__icon accordion__icon--rotate" : "accordion__icon"}/>
         </button>
-        <Carousel/>
+        <Carousel active={this.state.active}/>
       </div>
     )
   }

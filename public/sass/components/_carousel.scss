@@ -1,6 +1,6 @@
 .carousel {
   display: flex;
-  margin-top: 10rem;
+  margin-top: 5rem;
   align-items: center;
   vertical-align: middle;
   height: max-content;
@@ -20,7 +20,7 @@
     }
 
     & img {
-      height: 3rem;
+      height: 1.5rem;
     }
 
     &--left {
@@ -35,28 +35,36 @@
     white-space: nowrap;
     overflow-y: hidden;
     overflow-x: auto;
+    opacity: 1;
+    transition: opacity .5s;
+    transition-delay: .1s;
 
     &::-webkit-scrollbar {
       display: none;
+    }
+
+    &--hide {
+      opacity: 0;
     }
   }
 
   &__slide {
     display: inline-block;
-    padding-top: 2.5rem;
-    height: 18rem;
+    padding-top: 1.25rem;
+    height: 9rem;
     transition: all .3s;
     
     img {
       border-radius: 1rem;
       height: $carousel-pic-height;
+      cursor: pointer;
     }
     &:hover {
       transform: scale(1.03);
     }
 
     &:not(:first-child) {
-      padding-left: 5rem;
+      padding-left: 2.5rem;
     }
   }
 }
