@@ -16,6 +16,11 @@ class SignUp extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault();
+        console.log('hitting submit handle')
+        const signUpCall = this.props.signUp(this.state);
+        signUpCall.then((data) => {
+            console.log(data , 'sign up data')
+        })
     };
 
 
