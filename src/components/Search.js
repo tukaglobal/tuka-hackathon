@@ -43,15 +43,16 @@ class Search extends Component {
   }
   render() {
     return (
-      <div>
+      <div className="search-container">
         <form className="search">
           <input 
+          className="search-container__input"
           placeholder='Enter keyword, genre, or subgenre...'
           maxLength="100"
           ref={(input) => {this.search = input}}
           onChange={this.handleInputChange}
           />
-          <button type="submit">Search</button>
+          <button className="search-container__submit"><img src="../assets/search-icon.png" className="search-container__submit--icon" alt="search icon"/></button>
         </form>
         <ul id="artist-results"></ul>
       </div>

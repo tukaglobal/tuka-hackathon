@@ -7,10 +7,10 @@ import SignUp from './components/SignUp';
 
 function App() {
   return (
-    <div>
+    <div className="container">
       <Navbar/>
-      <SignUp/>
       <Search/>
+      <SignUp/>
       <Accordion/>
     </div>
   );
