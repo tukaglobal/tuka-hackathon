@@ -16,6 +16,8 @@ class Search extends Component {
     super(props);
 
     this.state = {
+      tracks: [],
+      trackMetadata: [],
       activeSuggestion: 0,
       filteredSuggestions: [],
       showSuggestions: false,
@@ -49,13 +51,6 @@ class Search extends Component {
       userInput: e.currentTarget.innerText
     });
   };
-
-  // old state below 
-
-  state = {
-    tracks: [],
-    trackMetadata: []
-  }
 
   componentDidMount() {
     this.getTracks()

@@ -39,27 +39,27 @@ class App extends Component {
           </Switch>
         </main>
         <Search  suggestions={[
-        "alternative_pop",
-        "alternative_rock",
-        "blues",
-        "brazilian",
-        "classic_pop",
-        "classic_rock",
-        "classical",
-        "country",
-        "dance",
-        "electronic",
-        "folk",
-        "gospel",
-        "hiphop",
-        "jazz",
-        "latin",
-        "metal",
-        "modern_pop",
-        "pop_rock",
-        "reggae",
-        "rnb",
-        "spoken"
+        "Alternative Pop",
+        "Alternative Rock",
+        "Blues",
+        "Brazilian",
+        "Classic Pop",
+        "Classic Rock",
+        "Classical",
+        "Country",
+        "Dance",
+        "Electronic",
+        "Folk",
+        "Gospel",
+        "HipHop",
+        "Jazz",
+        "Latin",
+        "Metal",
+        "Modern Pop",
+        "Pop Rock",
+        "Reggae",
+        "RnB",
+        "Spoken"
       ]}
         />
         <Accordion/>
